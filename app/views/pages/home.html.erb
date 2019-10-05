@@ -1,2 +1,64 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div id="banner">
+  <div class="container">
+  <div class="input mt-5">
+    <h1>Oktoberfest 2019</h1>
+    <p><i>Eine Gruppe</i> | <i>100 Maß</i></p>
+  </div>
+  </div>
+</div>
+
+
+<div class="container flex mt-5 mb-5">
+  <div>
+
+  <h2 class="mb-4">Die Auserkorenen</h2>
+
+  <div class="grid fit">
+    <% @users.each do |user| %>
+      <% id = "#{user.id}" %>
+      <div class="card-origin card-vertical a">
+        <div>
+          <%= cl_image_tag user.photo, class: "card-vertical-cover" %>
+        </div>
+        <div class="card-info">
+          <h3><%= user.name %></h3>
+         <h4><i><%= user.nickname %></i></h4>
+          <p>Erwartet: <strong><%= user.expected %></strong> Maß</p>
+          <% user.beers.each do |beer|%>
+          <p class=<%= id %>>Aktuell: <strong><%= beer.aktuell %></strong> Maß</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+  <div class="text-center">
+
+    <h2 class="mb-4">Total: <%= @total %></h2>
+
+    <div class="ratio card-origin pt-4">
+      <div class="end mx-auto"></div>
+      <% rest = 100 - @total %>
+      <% rest.times do %>
+        <div class="empty mx-auto"></div>
+      <% end %>
+      <% @total.times do %>
+        <div class="beer mx-auto"></div>
+      <% end %>
+      <div class="start mx-auto"></div>
+      <div class="flexb mt-5">
+        <% user = current_user %>
+        <% user.beers.each do |beer|%>
+        <%= simple_form_for [user, beer] do |f| %>
+        <%= f.hidden_field :aktuell, value: beer.aktuell + 1 %>
+        <%= f.submit "+", class:"btn btn-success"%>
+        <% end %>
+        <%= simple_form_for [user, beer] do |f| %>
+        <%= f.hidden_field :aktuell, value: beer.aktuell - 1 %>
+        <%= f.submit "-", class:"btn btn-danger"%>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
