@@ -143,10 +143,21 @@ h2 {
 
 @media(max-width: 768px) {
   .grid {
-    grid-template-columns: auto;
+    display: unset !important;
+    }
+  .card-origin {
+    margin-bottom: 10px;
   }
-  .a {
+  .card-origin {
     margin: 0px auto;
+    margin-bottom: 20px;
+  }
+  .fit {
+    text-align: center;
+  }
+  .b {
+    text-align: center;
+    margin-top: 30px;
   }
   .flex {
     flex-direction: column-reverse;
