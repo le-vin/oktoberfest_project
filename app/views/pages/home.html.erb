@@ -16,7 +16,7 @@
   <div class="grid fit">
     <% @users.each do |user| %>
       <% id = "#{user.id}" %>
-      <div class="card-origin card-vertical a">
+      <div class="card-origin card-vertical">
         <div>
           <%= cl_image_tag user.photo, class: "card-vertical-cover" %>
         </div>
